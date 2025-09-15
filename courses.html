@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Courses - Coursely</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --slate-50: #f8fafc; --slate-100: #f1f5f9; --slate-200: #e2e8f0; --slate-500: #64748b; --slate-800: #1e293b; --slate-900: #0f172a; --blue-600: #2563eb; --blue-700: #1d4ed8; --green-50: #f0fdf4; --red-500: #ef4444; --red-600: #dc2626; --white: #ffffff; --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        body { margin: 0; font-family: 'Inter', sans-serif; background-color: var(--slate-50); color: #1e293b; }
+        a { text-decoration: none; color: inherit; }
+        .btn-red { background-color: var(--red-500); }
+        .btn-red:hover { background-color: var(--red-600); }
+        .card-actions { display: flex; gap: 0.5rem; }
+        header { background-color: white; box-shadow: 0 4px 6px -1px #0000001a; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; }
+        .logo h1 { color: #2563eb; font-size: 1.8em; margin: 0; }
+        .header-controls { display: flex; align-items: center; gap: 20px; }
+        .welcome-text { font-weight: 500; }
+        .logout-btn { background-color: #ef4444; color: white; padding: 8px 16px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; }
+        .main-layout { display: flex; max-width: 1280px; margin: 2rem auto; padding: 0 20px; gap: 2rem; }
+        .sidebar { flex: 1; max-width: 300px; }
+        .sidebar-inner { background-color: white; padding: 1rem; border-radius: 0.5rem; box-shadow: 0 4px 6px -1px #0000001a; }
+        .nav-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+        .nav-link { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem; border-radius: 0.375rem; font-weight: 500; cursor: pointer; transition: background-color 0.2s; }
+        .nav-link.active { background-color: #eff6ff; color: var(--blue-600); font-weight: 600; }
+        .nav-link:not(.active):hover { background-color: var(--slate-100); }
+        .main-content { flex: 3; }
+        .main-title { font-size: 2rem; margin: 0 0 1.5rem 0; }
+        .course-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .course-card { background-color: white; padding: 1.5rem; border-radius: 0.5rem; box-shadow: 0 4px 6px -1px #0000001a; display: flex; flex-direction: column; justify-content: space-between; }
+        .course-card h3 { margin: 0; font-size: 1.25rem; }
+        .course-card p { margin: 0.25rem 0 0 0; color: var(--slate-500); }
+        .progress-bar { background-color: var(--slate-200); border-radius: 9999px; overflow: hidden; height: 0.75rem; margin-top: 1rem; }
+        .progress-bar-inner { background-color: var(--blue-600); height: 100%; transition: width 0.5s; }
+        .btn { width: 100%; color: white; font-weight: 600; padding: 0.75rem 1rem; border-radius: 0.375rem; margin-top: 1.5rem; border: none; cursor: pointer; }
+        .btn-blue { background-color: #2563eb; }
+        .lesson-view, .quiz-view, .results-view { background-color: white; padding: 2rem; border-radius: 0.5rem; box-shadow: 0 4px 6px -1px #0000001a; }
+        .lesson-item { display: flex; justify-content: space-between; align-items: center; padding: 1rem; border: 1px solid #e2e8f0; border-radius: 0.375rem; }
+        .quiz-question { margin-bottom: 1.5rem; }
+        .quiz-options { list-style: none; padding: 0; }
+        .quiz-options label { display: block; padding: 0.75rem; border: 1px solid #e2e8f0; border-radius: 0.5rem; margin-top: 0.5rem; cursor: pointer; }
+        .quiz-options input { margin-right: 10px; }
+        .results-view h2 { color: var(--blue-600); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo"><h1>Coursely</h1></div>
+        <div class="header-controls">
+            <span id="welcomeText" class="welcome-text"></span>
+            <button id="logoutBtn" class="logout-btn">Sign Out</button>
+        </div>
+    </header>
+
+    <div class="main-layout">
+        <aside class="sidebar">
+            <div class="sidebar-inner">
+                <h2 class="sidebar-title">Navigation</h2>
+                <ul class="nav-list">
+                    <li><a id="navAllCourses" class="nav-link active">All Courses</a></li>
+                    <li><a id="navMyCourses" class="nav-link">My Courses</a></li>
+                </ul>
+            </div>
+        </aside>
+        <main class="main-content">
+            <h1 id="main-title">All Courses</h1>
+            <div id="content-area"></div>
+        </main>
+    </div>
+
+<script>
+    // --- State Management ---
+    let currentUser = null;
+    let allCourses = [];
+    let userProgress = {};
+
+    const contentArea = document.getElementById('content-area');
+    const mainTitle = document.getElementById('main-title');
+    const navAllCourses = document.getElementById('navAllCourses');
+    const navMyCourses = document.getElementById('navMyCourses');
+
+    // --- Core Data Logic ---
+    async function fetchData() { /* ... unchanged ... */ }
+    async function enroll(courseId) { /* ... unchanged ... */ }
+    async function unenroll(courseId) { /* ... unchanged ... */ }
+    async function toggleLessonComplete(courseId, lessonId) { /* ... unchanged ... */ }
+    async function renderQuiz(lessonId) { /* ... unchanged ... */ }
+    async function submitQuiz(event, lessonId) { /* ... unchanged ... */ }
+    function renderQuizResults(lessonId, result) { /* ... unchanged ... */ }
+
+    // --- Rendering Functions ---
+    function renderAllCourses() {
+        mainTitle.textContent = 'All Courses';
+        // Add these two lines to handle the active class
+        navAllCourses.classList.add('active');
+        navMyCourses.classList.remove('active');
+
+        const courseHTML = allCourses.map(course => {
+            const isEnrolled = !!userProgress[course.id];
+            const progress = isEnrolled ? userProgress[course.id].progress : 0;
+            return `
+            <div class="course-card">
+                <div>
+                    <h3>${course.title}</h3><p>by ${course.instructor}</p>
+                    ${isEnrolled ? `<div class="progress-bar"><div class="progress-bar-inner" style="width: ${progress}%;"></div></div>` : ''}
+                </div>
+                <button class="btn btn-blue" onclick="${isEnrolled ? `renderLessonView(${course.id})` : `enroll(${course.id})`}">
+                    ${isEnrolled ? 'View Course' : 'Enroll Now'}
+                </button>
+            </div>
+        `;}).join('');
+        contentArea.innerHTML = `<div class="course-grid">${courseHTML}</div>`;
+    }
+
+    function renderMyCourses() {
+        mainTitle.textContent = 'My Courses';
+        // Add these two lines to handle the active class
+        navMyCourses.classList.add('active');
+        navAllCourses.classList.remove('active');
+
+        const myCourseIds = Object.keys(userProgress);
+        if (myCourseIds.length === 0) {
+            contentArea.innerHTML = `<p>You are not enrolled in any courses yet.</p>`;
+            return;
+        }
+        const myCourses = allCourses.filter(course => myCourseIds.includes(course.id.toString()));
+        const courseHTML = myCourses.map(course => {
+            const progress = userProgress[course.id].progress;
+            return `
+            <div class="course-card">
+                <div>
+                    <h3>${course.title}</h3><p>by ${course.instructor}</p>
+                    <p style="margin-top: 1rem; font-weight: 500;">Progress: ${progress}%</p>
+                    <div class="progress-bar"><div class="progress-bar-inner" style="width: ${progress}%;"></div></div>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-red" style="flex:1;" onclick="unenroll(${course.id})">Unenroll</button>
+                    <button class="btn btn-blue" style="flex:2;" onclick="renderLessonView(${course.id})">Continue Learning</button>
+                </div>
+            </div>
+        `;}).join('');
+        contentArea.innerHTML = `<div class="course-grid">${courseHTML}</div>`;
+    }
+
+    function renderLessonView(courseId) { /* ... unchanged ... */ }
+    
+    // --- Initial Load and Navigation ---
+    document.addEventListener('DOMContentLoaded', async () => { /* ... unchanged ... */ });
+    navAllCourses.addEventListener('click', renderAllCourses);
+    navMyCourses.addEventListener('click', renderMyCourses);
+    document.getElementById('logoutBtn').addEventListener('click', () => { /* ... unchanged ... */ });
+
+    // Full code for unchanged functions
+    async function fetchData() { const [coursesResponse, progressResponse] = await Promise.all([ fetch('http://localhost:3000/courses'), fetch(`http://localhost:3000/progress/${currentUser.id}`) ]); allCourses = await coursesResponse.json(); const progressData = await progressResponse.json(); userProgress = {}; progressData.forEach(item => { if (!userProgress[item.course_id]) { userProgress[item.course_id] = { lessons: {} }; } if (item.lesson_id) { userProgress[item.course_id].lessons[item.lesson_id] = { completed: !!item.is_completed, quiz_score: item.quiz_score }; } }); for (const courseId in userProgress) { const course = allCourses.find(c => c.id == courseId); if(course && course.lessons.length > 0) { const completedCount = Object.values(userProgress[courseId].lessons).filter(l => l.completed).length; userProgress[courseId].progress = Math.round((completedCount / course.lessons.length) * 100); } else { userProgress[courseId].progress = 0; } } }
+    async function enroll(courseId) { await fetch('http://localhost:3000/enroll', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ userId: currentUser.id, courseId: courseId }) }); await fetchData(); renderAllCourses(); }
+    async function unenroll(courseId) { if (!confirm("Are you sure you want to unenroll from this course? All your progress will be deleted.")) { return; } await fetch('http://localhost:3000/unenroll', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ userId: currentUser.id, courseId: courseId }) }); await fetchData(); renderMyCourses(); }
+    async function toggleLessonComplete(courseId, lessonId) { const isCurrentlyCompleted = userProgress[courseId]?.lessons[lessonId]?.completed || false; await fetch(`http://localhost:3000/lesson-progress`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ userId: currentUser.id, lessonId: lessonId, isCompleted: !isCurrentlyCompleted }) }); await fetchData(); renderLessonView(courseId); }
+    async function renderQuiz(lessonId) { const response = await fetch(`http://localhost:3000/quiz/${lessonId}`); const questions = await response.json(); const lesson = allCourses.flatMap(c => c.lessons).find(l => l.id === lessonId); mainTitle.textContent = `Quiz: ${lesson.title}`; if (questions.length === 0) { contentArea.innerHTML = `<div class="quiz-view"><p>No quiz available for this lesson yet.</p></div>`; return; } let quizHTML = `<form id="quizForm" onsubmit="submitQuiz(event, ${lessonId})">`; questions.forEach((q, index) => { quizHTML += ` <div class="quiz-question"> <h4>Q${index + 1}: ${q.text}</h4> <ul class="quiz-options"> ${q.options.map(o => `<li><label><input type="radio" name="q${q.id}" value="${o.id}" required> ${o.text}</label></li>`).join('')} </ul> </div> `; }); quizHTML += `<button type="submit" class="btn btn-blue">Submit Answers</button></form>`; contentArea.innerHTML = `<div class="quiz-view">${quizHTML}</div>`; }
+    async function submitQuiz(event, lessonId) { event.preventDefault(); const formData = new FormData(event.target); const answers = {}; for (let [key, value] of formData.entries()) { answers[key.substring(1)] = value; } const response = await fetch(`http://localhost:3000/quiz/submit`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ userId: currentUser.id, lessonId, answers }) }); const result = await response.json(); await fetchData(); renderQuizResults(lessonId, result); }
+    function renderQuizResults(lessonId, result) { const lesson = allCourses.flatMap(c => c.lessons).find(l => l.id === lessonId); const course = allCourses.find(c => c.lessons.some(l => l.id === lessonId)); mainTitle.textContent = `Results for: ${lesson.title}`; contentArea.innerHTML = ` <div class="results-view"> <h2>You Scored: ${result.score}%</h2> <p>You got ${result.correctCount} out of ${result.total} questions correct.</p> <button class="btn btn-blue" onclick="renderLessonView(${course.id})">Back to Lessons</button> </div> `; }
+    function renderLessonView(courseId) { const course = allCourses.find(c => c.id === courseId); if (!course) return; mainTitle.textContent = course.title; const lessonsHTML = course.lessons.map(lesson => { const lessonInfo = userProgress[course.id]?.lessons[lesson.id] || {}; const scoreText = lessonInfo.quiz_score !== null && lessonInfo.quiz_score !== undefined ? `<strong>Score: ${lessonInfo.quiz_score}%</strong>` : ''; return ` <li class="lesson-item"> <span>${lesson.title}</span> <div style="display:flex; align-items:center; gap: 20px;"> <span>${scoreText}</span> <button class="btn btn-blue" style="margin:0; width:auto; padding: 5px 10px;" onclick="renderQuiz(${lesson.id})"> ${scoreText ? 'Retake Quiz' : 'Start Quiz'} </button> </div> </li> `;}).join(''); contentArea.innerHTML = `<div class="lesson-view"><ul class="lesson-list">${lessonsHTML}</ul></div>`; }
+    document.addEventListener('DOMContentLoaded', async () => { const userData = sessionStorage.getItem('currentUser'); if (!userData) { window.location.href = 'index.html'; return; } currentUser = JSON.parse(userData); document.getElementById('welcomeText').textContent = `Welcome, ${currentUser.name}!`; await fetchData(); renderAllCourses(); });
+    document.getElementById('logoutBtn').addEventListener('click', () => { sessionStorage.removeItem('currentUser'); window.location.href = 'index.html'; });
+</script>
+</body>
+</html>

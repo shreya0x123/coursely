@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coursely - Modern Learning Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --slate-50: #f8fafc;
+            --slate-100: #f1f5f9;
+            --slate-200: #e2e8f0;
+            --slate-400: #94a3b8;
+            --slate-600: #475569;
+            --slate-800: #1e293b;
+            --slate-900: #0f172a;
+            --blue-600: #2563eb;
+            --blue-700: #1d4ed8;
+            --blue-50: #eff6ff;
+            --green-500: #22c55e;
+            --yellow-500: #eab308;
+            --white: #ffffff;
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--white);
+            color: var(--slate-600);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            color: var(--slate-900);
+            margin: 0;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow-md);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav.container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+        }
+
+        nav ul li a, #signInBtn {
+            text-decoration: none;
+            color: var(--slate-600);
+            font-weight: 500;
+            transition: color 0.2s;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-size: 1em;
+        }
+        
+        nav ul li a:hover, #signInBtn:hover {
+            color: var(--blue-600);
+        }
+
+        .logo h1 {
+            color: var(--blue-600);
+            font-size: 1.8em;
+        }
+
+        .hero {
+            background-color: var(--slate-50);
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            font-weight: 700;
+        }
+
+        .hero h1 span {
+            color: var(--blue-600);
+        }
+
+        .hero p {
+            max-width: 600px;
+            margin: 20px auto;
+            font-size: 1.1em;
+        }
+
+        .btn {
+            color: #fff;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            margin: 5px;
+            display: inline-block;
+            font-weight: 600;
+            transition: background-color 0.2s, transform 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background-color: var(--blue-600);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--blue-700);
+        }
+
+        .btn-secondary {
+            background-color: var(--white);
+            color: var(--blue-600);
+            border: 1px solid var(--slate-200);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--blue-50);
+        }
+        
+        .stats-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: var(--slate-900);
+        }
+
+        .stat-label {
+            color: var(--slate-600);
+            font-weight: 500;
+        }
+
+        .features, .how-it-works, .courses-section, .testimonials, .pricing, .plan-comparison {
+            padding: 70px 20px;
+        }
+
+        .features, .how-it-works, .testimonials, .plan-comparison {
+            background-color: var(--slate-50);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-header h2 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+        
+        .section-header p {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .feature-grid, .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background-color: var(--white);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: var(--shadow-md);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .about {
+            padding: 70px 20px;
+            background-color: var(--white);
+        }
+
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+            align-items: center;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .about-text ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .about-text li {
+            padding-left: 25px;
+            position: relative;
+            margin-bottom: 10px;
+        }
+        .about-text li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--green-500);
+            font-weight: bold;
+        }
+
+        .about-video {
+            flex: 1.2;
+            min-width: 300px;
+        }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #000;
+            border-radius: 10px;
+            box-shadow: var(--shadow-lg);
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .steps-container {
+            max-width: 800px;
+            margin: 0 auto;
+            counter-reset: steps-counter;
+        }
+        .steps-container ol {
+            list-style: none;
+            padding: 0;
+        }
+        .steps-container li {
+            background-color: var(--white);
+            padding: 25px;
+            padding-left: 70px;
+            border-radius: 8px;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .steps-container li::before {
+            counter-increment: steps-counter;
+            content: counter(steps-counter);
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 35px;
+            height: 35px;
+            background-color: var(--blue-600);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        .steps-container li h3 {
+            margin-bottom: 5px;
+        }
+
+        .testimonial-card {
+            background-color: var(--white);
+            padding: 25px;
+            border-left: 5px solid var(--blue-600);
+            border-radius: 8px;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .testimonial-card p:first-of-type {
+            font-style: italic;
+        }
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .author-info p {
+            margin: 0;
+            color: var(--slate-600);
+        }
+
+        .table-container {
+            max-width: 900px;
+            margin: 0 auto;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: var(--shadow-md);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid var(--slate-200);
+        }
+
+        th {
+            background-color: var(--slate-800);
+            color: #fff;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background-color: var(--slate-50);
+        }
+
+        tr:hover {
+            background-color: var(--blue-50);
+        }
+
+        .table-footer {
+            text-align: center;
+            font-weight: 500;
+            background-color: var(--slate-100);
+            color: var(--slate-800);
+        }
+        
+        .plan-comparison td {
+            text-align: center;
+        }
+        .plan-comparison td:first-child {
+            text-align: left;
+            font-weight: 500;
+        }
+        .plan-comparison .check {
+            color: var(--green-500);
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        .plan-comparison .cross {
+            color: var(--slate-400);
+        }
+
+        footer {
+            background-color: var(--slate-800);
+            color: var(--slate-400);
+            padding: 50px 20px 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            max-width: 1100px;
+            margin: 0 auto;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            color: var(--white);
+            margin-bottom: 15px;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin: 10px 0;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: var(--slate-400);
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #3e5064;
+            font-size: 0.9em;
+        }
+        
+        .copyright a {
+            color: var(--slate-400);
+        }
+        
+        .copyright a:hover {
+            color: var(--white);
+        }
+
+        /* === Modal and Form Styles === */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 200;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+            overflow-y: auto;
+            padding: 20px 0;
+        }
+
+        .modal-overlay.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            width: 100%;
+            max-width: 450px;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s;
+        }
+        
+        .modal-overlay.visible .modal-content {
+            transform: scale(1);
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 2em;
+            color: var(--slate-400);
+            cursor: pointer;
+            line-height: 1;
+            border: none;
+            background: none;
+        }
+        .close-btn:hover {
+            color: var(--slate-800);
+        }
+        
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            color: var(--slate-800);
+            margin-bottom: 5px;
+        }
+
+        .form-input, .form-select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--slate-200);
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 1em;
+            background-color: var(--white);
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--blue-600);
+            box-shadow: 0 0 0 3px var(--blue-50);
+        }
+        
+        .form-checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .form-checkbox-group label {
+            margin: 0;
+            font-size: 0.9em;
+        }
+
+        #terms {
+            width: 18px;
+            height: 18px;
+        }
+        
+        .form-submit-btn {
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .form-toggle-text {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .form-toggle-link {
+            color: var(--blue-600);
+            font-weight: 600;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+            font-family: inherit;
+            font-size: inherit;
+        }
+        
+        #signUpForm {
+            display: none;
+        }
+
+        #notification-container { position: fixed; top: 1rem; right: 1rem; z-index: 300; display: flex; flex-direction: column; gap: 0.5rem; }
+        .toast { padding: 1rem 1.5rem; border-radius: 0.5rem; color: white; opacity: 0; transform: translateX(100%); animation: slideIn 0.5s forwards; box-shadow: var(--shadow-lg); }
+        .toast.success { background-color: var(--green-500); }
+        .toast.info { background-color: var(--yellow-500); }
+        @keyframes slideIn { to { opacity: 1; transform: translateX(0); } }
+        @keyframes fadeOut { to { opacity: 0; transform: translateY(-20px); } }
+    </style>
+</head>
+<body>
+    <div id="notification-container"></div>
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <a href="#home"><h1>Coursely</h1></a>
+            </div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><button id="signInBtn" class="btn btn-primary">Sign In</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="container hero-content">
+                <h1>Transform Your Future with <span>Coursely</span></h1>
+                <p>Join a vibrant community of learners and unlock your potential with our cutting-edge Learning Management System. Explore expertly designed courses tailored to your goals.</p>
+                <div class="cta-container">
+                    <a href="#pricing" class="btn btn-primary">Enroll Today</a>
+                    <a href="#courses" class="btn btn-secondary">Explore Courses</a>
+                </div>
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-number">12K+</div>
+                        <div class="stat-label">Active Students</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">250+</div>
+                        <div class="stat-label">Expert Instructors</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">1.2K+</div>
+                        <div class="stat-label">Courses Available</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">98%</div>
+                        <div class="stat-label">Satisfaction Rate</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features" id="features">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Why Choose Coursely?</h2>
+                    <p>Our platform combines cutting-edge technology with proven educational methodologies to deliver an unparalleled learning experience.</p>
+                </div>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>Interactive Learning</h3>
+                        <p>Engage with hands-on projects, coding challenges, and real-world simulations that reinforce your learning.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Expert Instructors</h3>
+                        <p>Learn from industry leaders with real-world experience to guide you to success in your career journey.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Career Pathways</h3>
+                        <p>Structured learning paths designed to take you from beginner to job-ready professional in your chosen field.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="how-it-works" id="how-it-works">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Get Started in 3 Easy Steps</h2>
+                    <p>Embark on your learning journey with a simple and straightforward process.</p>
+                </div>
+                <div class="steps-container">
+                    <ol>
+                        <li>
+                            <h3>Explore & Choose</h3>
+                            <p>Browse our extensive catalog of courses and find the perfect one that aligns with your career goals.</p>
+                        </li>
+                        <li>
+                            <h3>Enroll & Pay</h3>
+                            <p>Select a pricing plan that fits your budget and complete the secure enrollment process in minutes.</p>
+                        </li>
+                        <li>
+                            <h3>Start Learning</h3>
+                            <p>Gain immediate access to all course materials, connect with instructors, and join the community.</p>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <section class="about" id="about">
+            <div class="container">
+                 <div class="section-header">
+                    <h2>Discover Our Mission</h2>
+                </div>
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>Empowering Learners Worldwide</h3>
+                        <p>Coursely is a premier Learning Management System developed to empower students, educators, and professionals. Inspired by innovative educational platforms, we strive to provide a seamless, engaging, and accessible learning experience.</p>
+                        <ul>
+                            <li>Accessible & Affordable Learning</li>
+                            <li>Supportive Global Community</li>
+                            <li>Focus on Practical, Job-Ready Skills</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary">Learn More</a>
+                    </div>
+                    <div class="about-video">
+                        <div class="video-container">
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/P6FORpg0KVo?si=3tzVeRzdTrB5mwzx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="courses-section" id="courses">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Featured Courses</h2>
+                    <p>Explore our most popular courses. Applications opening soon!</p>
+                </div>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <h3>Web Development</h3>
+                        <p>Master front-end and back-end technologies to build modern, responsive web applications from scratch.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Mobile App Development</h3>
+                        <p>Learn to create beautiful and functional applications for both iOS and Android platforms.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Cyber Security</h3>
+                        <p>Understand the principles of digital security and learn how to protect networks and data from threats.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials">
+            <div class="container">
+                <div class="section-header">
+                    <h2>What Our Students Say</h2>
+                    <p>Hear from learners around the world who have transformed their careers with Coursely.</p>
+                </div>
+                <div class="testimonial-grid">
+                    <div class="testimonial-card">
+                        <p>"Coursely completely changed my career trajectory. The Full Stack Developer program gave me the skills and confidence to land my dream job."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar" style="background: #2563eb;">RM</div>
+                            <div class="author-info">
+                                <h4>Rohan Mehta</h4>
+                                <p>Software Developer, Bengaluru</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p>"The flexibility of Coursely allowed me to balance my studies with a full-time job. The instructors are knowledgeable and the community is incredibly supportive."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar" style="background: #16a34a;">PS</div>
+                            <div class="author-info">
+                                <h4>Priya Sharma</h4>
+                                <p>Data Analyst, Mumbai</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p>"As a teacher, I've integrated Coursely into my curriculum. The platform's resources have enriched my students' learning experience beyond expectations."</p>
+                        <div class="testimonial-author">
+                            <div class="author-avatar" style="background: #f59e0b;">DG</div>
+                            <div class="author-info">
+                                <h4>Dharshini G.</h4>
+                                <p>Educator, Chennai</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+                
+        <section class="pricing" id="pricing">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Simple, Transparent Pricing</h2>
+                    <p>Choose the learning plan that fits your goals and budget. No hidden fees.</p>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Plan</th>
+                                <th>Best For</th>
+                                <th>Duration</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Basic</td>
+                                <td>Beginners exploring new topics</td>
+                                <td>1 month</td>
+                                <td>₹999</td>
+                            </tr>
+                            <tr>
+                                <td>Standard</td>
+                                <td>Serious learners building skills</td>
+                                <td>6 months</td>
+                                <td>₹4,999</td>
+                            </tr>
+                            <tr>
+                                <td>Premium</td>
+                                <td>Professionals seeking certification</td>
+                                <td>1 year</td>
+                                <td>₹8,999</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" class="table-footer">All plans come with a 30-day money-back guarantee</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="plan-comparison">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Detailed Plan Comparison</h2>
+                    <p>A closer look at what each plan offers to help you decide.</p>
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Basic</th>
+                                <th>Standard</th>
+                                <th>Premium</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Full Course Catalog Access</td>
+                                <td class="cross">✗</td>
+                                <td class="check">✓</td>
+                                <td class="check">✓</td>
+                            </tr>
+                            <tr>
+                                <td>Verified Certificates</td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="check">✓</td>
+                            </tr>
+                            <tr>
+                                <td>1-on-1 Mentorship</td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="check">✓</td>
+                            </tr>
+                            <tr>
+                                <td>Community Forum Access</td>
+                                <td class="check">✓</td>
+                                <td class="check">✓</td>
+                                <td class="check">✓</td>
+                            </tr>
+                             <tr>
+                                <td>Career Guidance & Support</td>
+                                <td class="cross">✗</td>
+                                <td class="cross">✗</td>
+                                <td class="check">✓</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Coursely</h3>
+                    <p>Transforming education through technology, innovation, and accessibility. Join our global learning community today.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Courses</a></li>
+                        <li><a href="#">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Webinars</a></li>
+                        <li><a href="#">Community</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li><a>Bengaluru, Karnataka</a></li>
+                        <li><a href="mailto:info@coursely.com">info@coursely.com</a></li>
+                        <li><a href="#">Live Chat Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Coursely. All rights reserved. <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+    
+    <div id="authModal" class="modal-overlay">
+        <div class="modal-content">
+            <button id="closeModalBtn" class="close-btn">&times;</button>
+            <div id="signInForm" class="form-container">
+                <h2>Welcome Back!</h2>
+                <form onsubmit="handleSignIn(event)">
+                    <div class="form-group">
+                        <label for="signInEmail">Email Address</label>
+                        <input type="email" id="signInEmail" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signInPassword">Password</label>
+                        <input type="password" id="signInPassword" class="form-input" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary form-submit-btn">Sign In</button>
+                </form>
+                <p class="form-toggle-text">
+                    New to Coursely? <button id="showSignUp" class="form-toggle-link">Create an account</button>
+                </p>
+            </div>
+            <div id="signUpForm" class="form-container">
+                <h2>Create Your Account</h2>
+                <form onsubmit="handleSignUp(event)">
+                    <div class="form-group">
+                        <label for="signUpName">Full Name</label>
+                        <input type="text" id="signUpName" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signUpEmail">Email Address</label>
+                        <input type="email" id="signUpEmail" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signUpPassword">Password</label>
+                        <input type="password" id="signUpPassword" class="form-input" minlength="8" required>
+                    </div>
+                     <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" id="confirmPassword" class="form-input" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary form-submit-btn">Create Account</button>
+                </form>
+                <p class="form-toggle-text">
+                    Already have an account? <button id="showSignIn" class="form-toggle-link">Sign In instead</button>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showNotification(message, type = 'success') {
+            const container = document.getElementById('notification-container');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.textContent = message;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.animation = 'fadeOut 1s forwards';
+                toast.addEventListener('animationend', () => toast.remove());
+            }, 4000);
+        }
+
+        const authModal = document.getElementById('authModal');
+        const signInBtn = document.getElementById('signInBtn');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const showSignUp = document.getElementById('showSignUp');
+        const showSignIn = document.getElementById('showSignIn');
+        const signInForm = document.getElementById('signInForm');
+        const signUpForm = document.getElementById('signUpForm');
+
+        function openModal() { authModal.classList.add('visible'); }
+        function closeModal() { authModal.classList.remove('visible'); }
+
+        if (signInBtn) signInBtn.addEventListener('click', openModal);
+        if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+        if (authModal) authModal.addEventListener('click', (event) => {
+            if (event.target === authModal) closeModal();
+        });
+        if (showSignUp) showSignUp.addEventListener('click', () => {
+            signInForm.style.display = 'none';
+            signUpForm.style.display = 'block';
+        });
+        if (showSignIn) showSignIn.addEventListener('click', () => {
+            signUpForm.style.display = 'none';
+            signInForm.style.display = 'block';
+        });
+
+        async function handleSignIn(event) {
+            event.preventDefault();
+            const email = document.getElementById('signInEmail').value;
+            const password = document.getElementById('signInPassword').value;
+
+            const response = await fetch('http://localhost:3000/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
+
+            const result = await response.json();
+            if (response.ok) {
+                sessionStorage.setItem('currentUser', JSON.stringify(result.user));
+                showNotification(result.message, 'success');
+                setTimeout(() => {
+                    window.location.href = 'courses.html';
+                }, 1000);
+            } else {
+                showNotification(result.message, 'info');
+            }
+        }
+
+        async function handleSignUp(event) {
+            event.preventDefault();
+            const name = document.getElementById('signUpName').value;
+            const email = document.getElementById('signUpEmail').value;
+            const password = document.getElementById('signUpPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (password !== confirmPassword) {
+                showNotification('Passwords do not match!', 'info');
+                return;
+            }
+
+            const response = await fetch('http://localhost:3000/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email, password })
+            });
+
+            const result = await response.json();
+            
+            if (response.ok) { 
+                showNotification('Account created! Please sign in.', 'success');
+                showSignIn.click();
+            } else { 
+                showNotification(result.message, 'info');
+            }
+        }
+    </script>
+</body>
+</html>
